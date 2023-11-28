@@ -5,11 +5,12 @@
 ## Requirements
 
  - You need to have git installed. run ``git`` in the terminal; if the command is not recognized install [git](https://github.com/git-guides/install-git). 
- - You need to have Anaconda or similar installed. Run ``conda info`` in the terminal; if the command is not recognized install [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html). 
+ - You need to have Anaconda or other package manager installed. Run ``conda info`` in the terminal; if the command is not recognized install [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html). 
  - You need to have FFMPEG installed. Run ``ffmpeg`` in the terminal; if the command is not recognized install [FFMPEG](https://ffmpeg.org/download.html#build-windows). 
+
 ## Install
 
-1. Open a terminal in the folder where you want to copy this. 
+1. Open a terminal in the folder where you want to copy this repository. 
 2. Copy-paste and run the following code: 
     ```
     git clone https://github.com/lpego/ExperNet.git
@@ -35,7 +36,7 @@ If only renaming or moving the images:
     	```
         python scripts/rename_copy_imgs.py YOUR_INPUT_FOLDER YOUR_OUTPUT_FOLDER
         ```
-3. Be patient! There is no feedback on screen if the script is running. When it's done it will show your cursor again. 
+3. Be patient! There is no feedback on screen if the script is running. When it's done it will show your cursor ready to type again. 
 
 If running FFMPEG: 
 1. [...]
