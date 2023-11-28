@@ -34,8 +34,18 @@ def rename_and_copy_jpg_files(input_folder, output_folder):
         # Record the mapping in the CSV data
         csv_data.append([old_filename, new_filename])
 
+    # Grab again new folder name
+    files = sorted([f for f in os.listdir(input_folder) if os.path.isfile(os.path.join(input_folder, f)) and f.lower().endswith('.jpg')])
+    for index, old_filename in enumerate(files, start=1):
+        # Extract date part from the old filename
+        date_part = old_filename[:8]
+        # Create new folder if it doesn't exist
+        new_folder = os.path.join(output_folder, f"{date_part}")
+        if not os.path.exists(new_folder):
+            os.makedirs(new_folder)
+    
     # Write CSV file
-    csv_file_path = os.path.join(output_folder, "file_mapping.csv")
+    csv_file_path = os.path.join(new_folder, "file_mapping.csv")
     with open(csv_file_path, mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(['Old Filename', 'New Filename'])
