@@ -32,14 +32,14 @@
 If only renaming or moving the images: 
 1. Navigate to the root directory of this repository and open a terminal
     > 📝 If you don''t know how to open a terminal in a specific folder in Windows, see [here](https://superuser.com/questions/339997/how-to-open-a-terminal-quickly-from-a-file-explorer-at-a-folder-in-windows-7)
-2. type and run the following code: 
-    	```
-        python scripts/rename_copy_imgs.py YOUR_INPUT_FOLDER YOUR_OUTPUT_FOLDER
-        ```
+2. type and the following code, substituting the input and output folders with your paths: 
+    ```
+    python scripts/rename_copy_imgs.py YOUR_INPUT_FOLDER YOUR_OUTPUT_FOLDER
+    ```
 3. Be patient! There is no feedback on screen if the script is running. When it's done it will show your cursor ready to type again. 
 
 If running FFMPEG: 
-1. [...]
+1. [...] For inspo: https://trac.ffmpeg.org/wiki/Slideshow
 
 # ToDo
 - [x] rename files so that the last part is sequential
