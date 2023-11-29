@@ -50,7 +50,7 @@ def rename_and_move_files(input_folder, output_folder):
 
 # Replace 'input_folder_path' and 'output_folder_path' with your actual paths
 input_folder_path = 'D:\ExperNet\data\memoria_20b'
-output_folder_path = 'D:\ExperNet\data\moved_1'
+output_folder_path = 'D:\ExperNet\data\renamed'
 
 rename_and_move_files(input_folder_path, output_folder_path)
 
@@ -112,7 +112,7 @@ rename_and_move_files(input_folder_path, output_folder_path)
 
 # # Replace 'input_folder_path' and 'output_folder_path' with your actual paths
 # input_folder_path = 'D:\ExperNet\data\memoria_20b'
-# output_folder_path = 'D:\ExperNet\data\moved_2'
+# output_folder_path = 'D:\ExperNet\data\renamed'
 
 # rename_and_copy_files(input_folder_path, output_folder_path)
 
