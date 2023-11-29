@@ -36,8 +36,8 @@
     ``` bat
     python scripts/rename_copy_imgs.py YOUR_INPUT_FOLDER YOUR_OUTPUT_FOLDER
     ```
+    > ⚠️ There can be no spaces (`` ``) in your file paths! You can try enclosing your paths in quotation marks `" "`, but it might not always work! 
 3. Be patient! There is no feedback on screen if the script is running. When it's done it will show your cursor ready to type again. 
-    > ⚠️ There can be no spaces (`` ``) in your file paths!
 
     > ⚠️ If you are copying from an external hard drive to your local disk (or vice-versa), make sure to use backlashes (``\``) and not forward slashes (``/``) in your file path. 
 
