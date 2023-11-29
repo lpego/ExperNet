@@ -29,21 +29,31 @@
 
 
 ## How to use
-If only renaming or moving the images: 
+**If only renaming or moving the images:** 
 1. Navigate to the root directory of this repository and open a terminal
     > 📝 If you don''t know how to open a terminal in a specific folder in Windows, see [here](https://superuser.com/questions/339997/how-to-open-a-terminal-quickly-from-a-file-explorer-at-a-folder-in-windows-7)
-2. type and the following code, substituting the input and output folders with your paths: 
+2. Type in the following code, substituting the input and output folders with your paths: 
     ```
     python scripts/rename_copy_imgs.py YOUR_INPUT_FOLDER YOUR_OUTPUT_FOLDER
     ```
 3. Be patient! There is no feedback on screen if the script is running. When it's done it will show your cursor ready to type again. 
+    > ⚠️ There can be no spaces (`` ``) in your file paths!
 
-If running FFMPEG: 
-1. [...] For inspo: https://trac.ffmpeg.org/wiki/Slideshow
+    > ⚠️ If you are copying from an external hard drive to your local disk (or vice-versa), make sure to use backlashes (``\``) and not forward slashes (``/``) in your file path. 
+
+**If running FFMPEG manually on one folder:** 
+1. Navigate to the folder containing the images that you want to make into a video and open a terminal there. 
+2. Type the following code, substituting the input file name and output file name: 
+    ```
+    ffmpeg -framerate 1 -i YOUR_FILE_NAME_%d.jpg YOUR_OUTPUT_NAME.avi
+    ```
+3. What this does is: make a video at 1 frame per second (it's best if this matches the frequency of images taken in the field), using as input files called ``YOUR_FILE_NAME_`` followed by a sequential number (``%3d``) that are ``.jpg`` format, and saves them as a video named ``YOUR_OUTPUT_NAME`` of format ``.avi``. 
+    > 📝 ``%03d`` is a formatting string, specifying how the sequential numbers following the base file name are constructed; see this [StackOverflow answer](https://stackoverflow.com/questions/23718936/explanation-for-sprintf03d-7-functionality) for more details. 
+4. There are *many, many more* options in FFMPEG for output, you have to experiment with what works best for you. Have a look [here](https://trac.ffmpeg.org/wiki/Slideshow) for inspiration. 
 
 # ToDo
 - [x] rename files so that the last part is sequential
     - preserve data & time info! 
 - [x] save in variables/lists the time of start for each day of recording
-- [ ] use those variables for the "fixed name" part fo the FFMPEG call
+- [x] ~~use those variables for the "fixed name" part fo the FFMPEG call~~ no need, can use base file name instead. 
 - [ ] make batch script that calls FFMPEG sequentially (once per day of recording) and puts the images in one video file. 
