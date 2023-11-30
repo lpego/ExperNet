@@ -102,3 +102,4 @@
 - [x] save in variables/lists the time of start for each day of recording
 - [x] ~~use those variables for the "fixed name" part fo the FFMPEG call~~ no need, can grab base file name from dir name instead. 
 - [x] make batch script that calls FFMPEG sequentially (once per day of recording) and puts the images in one video file. 
+- [ ] rename files starting back up from 1 for each new day of recording
