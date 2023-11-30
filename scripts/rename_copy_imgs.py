@@ -16,6 +16,7 @@ def rename_and_copy_jpg_files(input_folder, output_folder):
     index = 1
     folder_mapping = {}
 
+    # Iterate over files in the input folder
     for old_filename in files:
         # Extract date part from the old filename
         prefix = old_filename[:8]
