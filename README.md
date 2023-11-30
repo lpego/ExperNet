@@ -21,7 +21,7 @@
 
 ## What does what
 
-``scripts/rename_copy_imgs.py`` renames images in a way that is more amenable for FFMPEG and subsequent processing. It creates *one folder per day of recording* (named after the first image recorded that day) and copies all images for that day in that folder, renaming them in the process. It also creates a ``file_mapping.csv`` with the old, non-renamed file names and their corresponding new name. 
+``scripts/rename_copy_imgs.py`` renames images in a way that is more amenable for FFMPEG and subsequent processing. It creates *one folder per day of recording* (named after the day of recording) and copies all images for that day in that folder, renaming them by appending a sequential number at the end (index starts back at 1 for each new day of recording). It also creates a ``file_mapping.csv`` with the old, non-renamed file names and their corresponding new name, so that you can always go back and find at what time a picture was taken. 
 
 ``scripts/rename_move_imgs.py`` does the same as above but moves the images, not copies. 
 
@@ -102,4 +102,4 @@
 - [x] save in variables/lists the time of start for each day of recording
 - [x] ~~use those variables for the "fixed name" part fo the FFMPEG call~~ no need, can grab base file name from dir name instead. 
 - [x] make batch script that calls FFMPEG sequentially (once per day of recording) and puts the images in one video file. 
-- [ ] rename files starting back up from 1 for each new day of recording
+- [x] rename files starting back up from 1 for each new day of recording
