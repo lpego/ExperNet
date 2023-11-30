@@ -12,17 +12,25 @@ def rename_and_copy_jpg_files(input_folder, output_folder):
     files = sorted([f for f in os.listdir(input_folder) if os.path.isfile(os.path.join(input_folder, f)) and f.lower().endswith('.jpg')])
 
     # Initialize variables
-    csv_data = []
+    current_prefix = files[0][:8]
+    index = 1
+    folder_mapping = {}
 
-    for index, old_filename in enumerate(files, start=1):
+    for old_filename in files:
         # Extract date part from the old filename
-        date_part = old_filename[:8]
+        prefix = old_filename[:8]
+
+        if prefix != current_prefix:
+            current_prefix = prefix
+            index = 1
+        else:
+            index += 1
 
         # Generate the new filename
-        new_filename = f"{date_part}_{index}.jpg"
-
+        new_filename = f"{prefix}_{index}.jpg"
+        
         # Create new folder if it doesn't exist
-        new_folder = os.path.join(output_folder, f"{date_part}")
+        new_folder = os.path.join(output_folder, f"{prefix}")
         if not os.path.exists(new_folder):
             os.makedirs(new_folder)
 
@@ -30,26 +38,19 @@ def rename_and_copy_jpg_files(input_folder, output_folder):
         old_filepath = os.path.join(input_folder, old_filename)
         new_filepath = os.path.join(new_folder, new_filename)
         shutil.copy2(old_filepath, new_filepath)
+        
+        # Update folder mapping dictionary
+        if new_folder not in folder_mapping:
+            folder_mapping[new_folder] = []
+        folder_mapping[new_folder].append([old_filename, new_filename])
 
-        # Record the mapping in the CSV data
-        csv_data.append([old_filename, new_filename])
-
-    # Grab again new folder name
-    files = sorted([f for f in os.listdir(input_folder) if os.path.isfile(os.path.join(input_folder, f)) and f.lower().endswith('.jpg')])
-    for index, old_filename in enumerate(files, start=1):
-        # Extract date part from the old filename
-        date_part = old_filename[:8]
-        # Create new folder if it doesn't exist
-        new_folder = os.path.join(output_folder, f"{date_part}")
-        if not os.path.exists(new_folder):
-            os.makedirs(new_folder)
-    
-    # Write CSV file
-    csv_file_path = os.path.join(new_folder, "file_mapping.csv")
-    with open(csv_file_path, mode='w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file)
-        csv_writer.writerow(['Old Filename', 'New Filename'])
-        csv_writer.writerows(csv_data)
+    # Write CSV files for each folder
+    for folder, data in folder_mapping.items():
+        csv_file_path = os.path.join(folder, "file_mapping.csv")
+        with open(csv_file_path, mode='w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(['Old Filename', 'New Filename'])
+            csv_writer.writerows(data)
 
 if __name__ == "__main__":
     # Set up command line arguments
