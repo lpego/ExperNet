@@ -1,16 +1,19 @@
 # ExperNet data wrangling
 
-> ⚠️ All the below assumes you are running Windows. 
+> ⚠️ All the below assumes you are running Windows 10. 
 
 ## Requirements
 
  - You need to have git installed. run ``git`` in the terminal; if the command is not recognized install [git](https://github.com/git-guides/install-git). 
- - You need to have Anaconda or other package manager installed. Run ``conda info`` in the terminal; if the command is not recognized install [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html). 
- - You need to have FFMPEG installed. Run ``ffmpeg`` in the terminal; if the command is not recognized install [FFMPEG](https://ffmpeg.org/download.html#build-windows). 
+ - You need to have Mamba or another python package manager installed. Run ``conda info`` in the terminal; if the command is not recognized, install [Mamba](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe); if this link does not work, navigate to Mamba's install page [here](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html) and follow the instructions. 
+ - You need to have FFMPEG installed. Run ``ffmpeg`` in the terminal; if the command is not recognized, install [FFMPEG](https://ffmpeg.org/download.html#build-windows). 
 
-## Install
+When prompted during installs, choose "Install just for me", and leave all the options to default. 
+
+## Install this repository
 
 1. Open a terminal in the folder where you want to copy this repository. 
+    > 📝 If you don't know how to open a terminal in a specific folder in Windows, see [here](https://superuser.com/questions/339997/how-to-open-a-terminal-quickly-from-a-file-explorer-at-a-folder-in-windows-7)
 2. Copy-paste and run the following code: 
     ``` bat
     git clone https://github.com/lpego/ExperNet.git
@@ -27,22 +30,31 @@
 
 ``scripts/run_ffmpeg.bat`` calls sequentially FFMPEG on *all* the subfolders of a parent directory, and makes a video out of the images contained in this subfolders. Parameters are set directly in the ``.bat`` file. 
 
-
 ## How to use
+**Opening a Miniforge terminal in a specific folder:** 
+ - Navigate to the root directory of this repository and open the Miniforge terminal there, see animation below: 
+    - Go to the address bar of you File Explorer. 
+    - Click on the white part and copy the address. 
+    - Open the Miniforge terminal: Start menu > Type "Miniforge" > Click on "Miniforge prompt". 
+    - In the Miniforge terminal, type: `chdir ` (with a space after!) and paste the address you copied (either Ctrl+V or right-click). 
+    - Press Enter; now the line on your Miniforge terminal should be the same as the address you specified. 
+
+![](assets/Miniforge_changedir.gif)
+
 **If only renaming or moving the images:** 
-1. Navigate to the root directory of this repository and open a terminal
-    > 📝 If you don''t know how to open a terminal in a specific folder in Windows, see [here](https://superuser.com/questions/339997/how-to-open-a-terminal-quickly-from-a-file-explorer-at-a-folder-in-windows-7)
-2. Type in the following code, substituting the input and output folders with your paths: 
+1. Navigate to the root directory of this repository and open the Miniforge terminal there. 
+2. Type in the following code, substituting the `YOUR_INPUT_FOLDER` input and `YOUR_OUTPUT_FOLDER` output folders with your paths: 
     ``` bat
     python scripts/rename_copy_imgs.py YOUR_INPUT_FOLDER YOUR_OUTPUT_FOLDER
     ```
-    > ⚠️ There can be no spaces (`` ``) in your file paths! You can try enclosing your paths in quotation marks `" "`, but it might not always work! 
+    > ⚠️ Having spaces (`` ``) in your file paths can cause problems. You can try enclosing your paths in quotation marks `" "`, but it might not always work! 
+
 3. Be patient! There is no feedback on screen if the script is running. When it's done it will show your cursor ready to type again. 
 
     > ⚠️ If you are copying from an external hard drive to your local disk (or vice-versa), make sure to use backlashes (``\``) and not forward slashes (``/``) in your file path. 
 
 **If running FFMPEG manually on one folder:** 
-1. Navigate to the folder containing the images that you want to make into a video and open a terminal there. 
+1. Navigate to the folder containing the images that you want to make into a video and open a Miniforge terminal there. 
 2. Type the following code, substituting the input file name and output file name: 
     ``` bat
     ffmpeg -framerate 1 -i YOUR_FILE_NAME_%d.jpg YOUR_OUTPUT_NAME.avi
@@ -52,7 +64,7 @@
 4. There are *many, many* more options in FFMPEG for output, you have to experiment with what works best for you. Have a look [here](https://trac.ffmpeg.org/wiki/Slideshow) for inspiration. 
 
 **If running FFMPEG on all folders:** 
-1. Open the file ``scripts/run_ffmpeg.bat`` in a text editor. It should look something like this: 
+1. Open the file ``scripts/run_ffmpeg.bat`` in a text editor, like [Notepad++](https://notepad-plus-plus.org/). It should look something like this: 
     ``` bat
     @echo off
     setlocal enabledelayedexpansion
@@ -87,10 +99,10 @@
     ```
 2. The important parts of this script are: 
     - line 6: ``set "parentDirectory=YOUR\FILE\PATH\GOES\HERE"``, where you need to substitute the path of the directory containing the various subfolders that contain the images. 
-    - line 22: ``ffmpeg -framerate 1 -y -i %%i_%%d.jpg %%i.avi``, that contains the FFMPEG call. It's the same as the manual call explained above, with the only difference being that we use the contents of variable ``%%i`` instead of specifying the file name directly. This variable is a list of the names of the various subfolder containing the images, therefore *the the images inside the subfolders must be named the same as the subfolders themselves*. You can change the options (e.g. ``-framerate``), file formats (e.g. ``.avi``) and flags (e.g. ``-y``) in the call as you wish. 
+    - line 22: ``ffmpeg -framerate 1 -y -i %%i_%%d.jpg %%i.avi``, that contains the FFMPEG call. It's the same as the manual call explained above, with the only difference being that we use the contents of variable ``%%i`` instead of specifying the file name directly. This variable is a list of the names of the various subfolder containing the images, therefore *the images inside the subfolders must be named the same as the subfolders themselves*. You can change the options (e.g. ``-framerate``), file formats (e.g. ``.avi``) and flags (e.g. ``-y``) in the call as you wish. 
     > ⚠️ The ``-y`` flag means FFMPEG will overwrite output files tih the same name without asking! 
 3. Once you have modified the script according to your needs, you can save it with a different name than the template; let's say you save it as ``scripts/run_ffmpeg_test.bat``. 
-4. Open a terminal in the root of this repo, and type: 
+4. Open a Miniforge terminal in the root of this repo, and type: 
     ``` bat
     scripts/run_ffmpeg_test.bat
     ``` 
@@ -103,3 +115,4 @@
 - [x] ~~use those variables for the "fixed name" part fo the FFMPEG call~~ no need, can grab base file name from dir name instead. 
 - [x] make batch script that calls FFMPEG sequentially (once per day of recording) and puts the images in one video file. 
 - [x] rename files starting back up from 1 for each new day of recording
+- [ ] add progress bar to scripts?
