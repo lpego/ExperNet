@@ -54,7 +54,7 @@ When prompted during installs, choose "Install just for me", and leave all the o
     > ⚠️ If you are copying from an external hard drive to your local disk (or vice-versa), make sure to use backlashes (``\``) and not forward slashes (``/``) in your file path. 
 
 **If running FFMPEG manually on one folder:** 
-1. Navigate to the folder containing the images that you want to make into a video and open a Miniforge terminal there. 
+1. Navigate to the folder containing the images that you want to make into a video and open a terminal there. 
 2. Type the following code, substituting the input file name and output file name: 
     ``` bat
     ffmpeg -framerate 1 -i YOUR_FILE_NAME_%d.jpg YOUR_OUTPUT_NAME.avi
@@ -102,7 +102,7 @@ When prompted during installs, choose "Install just for me", and leave all the o
     - line 22: ``ffmpeg -framerate 1 -y -i %%i_%%d.jpg %%i.avi``, that contains the FFMPEG call. It's the same as the manual call explained above, with the only difference being that we use the contents of variable ``%%i`` instead of specifying the file name directly. This variable is a list of the names of the various subfolder containing the images, therefore *the images inside the subfolders must be named the same as the subfolders themselves*. You can change the options (e.g. ``-framerate``), file formats (e.g. ``.avi``) and flags (e.g. ``-y``) in the call as you wish. 
     > ⚠️ The ``-y`` flag means FFMPEG will overwrite output files tih the same name without asking! 
 3. Once you have modified the script according to your needs, you can save it with a different name than the template; let's say you save it as ``scripts/run_ffmpeg_test.bat``. 
-4. Open a Miniforge terminal in the root of this repo, and type: 
+4. Open a terminal in the root of this repo, and type: 
     ``` bat
     scripts/run_ffmpeg_test.bat
     ``` 
@@ -115,4 +115,6 @@ When prompted during installs, choose "Install just for me", and leave all the o
 - [x] ~~use those variables for the "fixed name" part fo the FFMPEG call~~ no need, can grab base file name from dir name instead. 
 - [x] make batch script that calls FFMPEG sequentially (once per day of recording) and puts the images in one video file. 
 - [x] rename files starting back up from 1 for each new day of recording
-- [ ] add progress bar to scripts?
+- [x] add progress bar to python scripts
+    - [x] pb for `rename_copy_img.py`
+    - [x] pb for `rename_move_imgs.py`
