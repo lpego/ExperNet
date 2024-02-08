@@ -2,6 +2,7 @@ import os
 import shutil
 import csv
 import argparse
+from tqdm.auto import tqdm
 
 def rename_and_move_jpg_files(input_folder, output_folder):
     # Create output folder if it doesn't exist
@@ -17,7 +18,7 @@ def rename_and_move_jpg_files(input_folder, output_folder):
     folder_mapping = {}
 
     # Iterate over files in the input folder
-    for old_filename in files:
+    for old_filename in tqdm(files):
         # Extract date part from the old filename
         prefix = old_filename[:8]
 
